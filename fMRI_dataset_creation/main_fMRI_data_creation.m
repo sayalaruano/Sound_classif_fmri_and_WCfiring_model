@@ -45,20 +45,47 @@ n_vox_F_allsubj == length(concatenatedMatrices{4})
 % csv file for having a reference
 voxels_regions_idx = [n_vox_A1_allsubj, n_vox_R_allsubj, n_vox_S_allsubj, n_vox_F_allsubj];
 
+voxels_subj1_idx = [length(subj1.Data(1).SoundResponse), length(subj1.Data(2).SoundResponse), length(subj1.Data(3).SoundResponse), length(subj1.Data(4).SoundResponse)];
+
+voxels_subj2_idx = [length(subj2.Data(1).SoundResponse), length(subj2.Data(2).SoundResponse), length(subj2.Data(3).SoundResponse), length(subj2.Data(4).SoundResponse)];
+
+voxels_subj3_idx = [length(subj3.Data(1).SoundResponse), length(subj3.Data(2).SoundResponse), length(subj3.Data(3).SoundResponse), length(subj3.Data(4).SoundResponse)];
+
+voxels_subj4_idx = [length(subj4.Data(1).SoundResponse), length(subj4.Data(2).SoundResponse), length(subj4.Data(3).SoundResponse), length(subj4.Data(4).SoundResponse)];
+
+voxels_subj5_idx = [length(subj5.Data(1).SoundResponse), length(subj5.Data(2).SoundResponse), length(subj5.Data(3).SoundResponse), length(subj5.Data(4).SoundResponse)];
+
 % Create a cell array with the variable names
 regions = {'A1', 'R', 'Slow', 'Fast'};
 
 % Create a table with the variable names as a column and the array values
-voxels_regions_idx_table = table(regions', voxels_regions_idx', 'VariableNames', {'VariableName', 'Value'});
+voxels_regions_idx_table = table(regions', voxels_regions_idx', 'VariableNames', {'Region', 'Allsubjects'});
 
+voxels_regions_idx_table.Subject1 = voxels_subj1_idx';
+voxels_regions_idx_table.Subject2 = voxels_subj2_idx';
+voxels_regions_idx_table.Subject3 = voxels_subj3_idx';
+voxels_regions_idx_table.Subject4 = voxels_subj4_idx';
+voxels_regions_idx_table.Subject5 = voxels_subj5_idx';
 %% Combine all regions for al subjects in a single matrix
 fmri_allregions_and_subj = horzcat(concatenatedMatrices{:});
 
 %% Export concatenated fmri data and number of voxels per region
-filename_fmri = 'fmri_allsubj_and_regions.csv';
-writematrix(fmri_allregions_and_subj, filename_fmri);
+filename_fmri_allregions = 'fmri_allsubj_and_regions.csv';
+writematrix(fmri_allregions_and_subj, filename_fmri_allregions);
 
 filename_voxel_regions_idx = 'fmri_voxel_regions_idx.csv';
 writetable(voxels_regions_idx_table, filename_voxel_regions_idx);
+
+filename_fmri_A1 = 'fmri_allsubj_A1.csv';
+writematrix(concatenatedMatrices{1}, filename_fmri_A1);
+
+filename_fmri_R = 'fmri_allsubj_R.csv';
+writematrix(concatenatedMatrices{2}, filename_fmri_R);
+
+filename_fmri_S = 'fmri_allsubj_S.csv';
+writematrix(concatenatedMatrices{3}, filename_fmri_S);
+
+filename_fmri_F = 'fmri_allsubj_F.csv';
+writematrix(concatenatedMatrices{4}, filename_fmri_F);
 
 

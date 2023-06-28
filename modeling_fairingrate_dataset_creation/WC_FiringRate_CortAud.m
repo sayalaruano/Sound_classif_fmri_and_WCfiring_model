@@ -21,7 +21,8 @@
 
 function [EE1, EE2, EE3, EE4] = WC_FiringRate_CortAud(size, lim1_frqax, lim2_frqax, time, fs, rate, depth, carr_frq, sound)
 
-% close all; clear; clc; tic
+% close all; clear; clc; 
+tic;
 disp(['Modeling spectro-temporal processing in 2 core (A1,R) and 2 belt (Slow, Fast) areas of the AC:' newline])
 
 %% Initializing Frequency axis
